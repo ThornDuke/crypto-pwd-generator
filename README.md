@@ -1,5 +1,17 @@
 # crypto-pwd-generator
 
+<!--
+![npms.io](https://img.shields.io/npms-io/maintenance-score/crypto-pwd-generator?style=plastic&logo=npm&label=maintenance)
+![npms.io](https://img.shields.io/npms-io/quality-score/crypto-pwd-generator?style=plastic&logo=npm&label=quality)
+![npms.io](https://img.shields.io/npms-io/popularity-score/crypto-pwd-generator?style=plastic&logo=npm&label=popularity)
+[![NPM Downloads](https://img.shields.io/npm/d18m/crypto-pwd-generator?style=plastic&logo=npm)](https://www.npmjs.com/package/crypto-pwd-generator)
+-->
+
+[![NPM Version](https://img.shields.io/npm/v/crypto-pwd-generator?style=plastic&logo=npm&label=version)](https://www.npmjs.com/package/crypto-pwd-generator)
+[![NPM License](https://img.shields.io/npm/l/crypto-pwd-generator?style=plastic&logo=GNU)](https://www.gnu.org/licenses/gpl-3.0.html)
+![Node Current](https://img.shields.io/node/v/crypto-pwd-generator?style=plastic&logo=nodedotjs&logoColor=white&logoSize=auto)
+![npm bundle size](https://img.shields.io/bundlephobia/min/crypto-pwd-generator?style=plastic&logo=webpack)
+
 A simple, configurable library for generating rock-solid passwords.
 
 ## Overview
@@ -38,11 +50,11 @@ const pwdListA = pwds.generate();
 pwdListA.forEach(pw => console.log('default', pw));
 
 // generate passwords with custom parameters
-const pwdListB = pwds.generate({ passwordQuantity: 21, passwordLength: 16 });
+const pwdListB = pwds.generate({ quantity: 21, pwLength: 16 });
 pwdListB.forEach(pw => console.log('custom', pw));
 
 // I need just ONE password
-const password = pwds.generate()[0];
+const password = pwds.generate({ pwLength: 1 })[0];
 console.log('one pw', password);
 ```
 
@@ -56,45 +68,45 @@ const pwds = require('crypto-pwd-generator');
 
 const pwdsList = pwds.generate({
   //////
-  // the length of the generated list;
-  // number; min: 1; max: 100; default: 10;
-  passwordQuantity: 10,
-  //////
   // the length of every generated password;
-  // number; min: 8 chars; max: 128 chars; default: 12 chars;
-  passwordLength: 12,
+  // type: number; min: 8 chars; max: 128 chars; default: 12 chars;
+  pwLength: 12,
+  //////
+  // the length of the generated list;
+  // type: number; min: 1; max: 100; default: 10;
+  quantity: 10,
   //////
   // A string containing the uppercase characters used to construct the passwords;
-  // string; minLength: 8; maxLength: 260; default: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  // type: string; minLength: 8; maxLength: 260; default: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   uppercases: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
   //////
   // Minimum amount of uppercase characters contained in each password;
-  // number; min: 1; max: 2; default: 1;
-  uppercasesOccurrences: 1,
+  // type: number; min: 1; max: 2; default: 1;
+  uppercasesQty: 1,
   //////
   // A string containing the lowercase characters used to construct the passwords;
-  // string; minLength: 1; maxLength: 260; default: 'abcdefghijklmnopqrstuvwxyz';
+  // type: string; minLength: 1; maxLength: 260; default: 'abcdefghijklmnopqrstuvwxyz';
   lowercases: 'abcdefghijklmnopqrstuvwxyz',
   //////
   // Minimum amount of lowercase characters contained in each password;
-  // number; min: 1; max: 2; default: 1;
-  lowercasesOccurrences: 1,
+  // type: number; min: 1; max: 2; default: 1;
+  lowercasesQty: 1,
   //////
   // A string containing the numbers used to construct the passwords;
-  // string; minLength: 1; maxLength: 100; default: '0123456789';
+  // type: string; minLength: 1; maxLength: 100; default: '0123456789';
   digits: '0123456789',
   //////
   // Minimum amount of digits contained in each password;
-  // number; min: 1; max: 2; default: 1;
-  digitsOccurrences: 1,
+  // type: number; min: 1; max: 2; default: 1;
+  digitsQty: 1,
   //////
   // A string containing the symbols used to construct the passwords;
-  // string; minLength: 1; maxLength: 100; default: '£$%&+*/-@#';
+  // type: string; minLength: 1; maxLength: 100; default: '£$%&+*/-@#';
   symbols: '£$%&+*/-@#',
   //////
   // Minimum amount of special characters contained in each password;
-  // number; min: 1; max: 2; default: 1;
-  symbolsOccurrences: 1,
+  // type: number; min: 1; max: 2; default: 1;
+  symbolsQty: 1,
 });
 ```
 

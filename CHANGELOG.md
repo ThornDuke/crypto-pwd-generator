@@ -10,12 +10,17 @@
 (example: https://gist.github.com/ThornDuke/64da76cd4a56b16492d5101691f6108f)
 -->
 
-## [Unreleased]
+## [1.2.0] - 2024-05-30
+
+### Added
+
+- <README.md>: badges
 
 ### Changed
 
 - <src/pwdgen.js>: all the defaults definitions in one place
 - <src/pwdgen.js>: renamed the defaults and the parameters
+- <README.md>: updated with the new defaults
 
 ## [1.1.3] - 2024-05-30
 
