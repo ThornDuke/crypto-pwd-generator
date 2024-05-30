@@ -1,0 +1,37 @@
+{
+  "name": "crypto-pwd-generator",
+  "version": "1.1.2",
+  "description": "A strong password generator",
+  "keywords": [
+    "cli",
+    "passwords",
+    "password generator"
+  ],
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "src/pwdgen.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThornDuke/crypto-pwd-generator.git"
+  },
+  "homepage": "https://github.com/ThornDuke/crypto-pwd-generator",
+  "bugs": {
+    "url": "https://github.com/ThornDuke/crypto-pwd-generator/issues"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "preferGlobal": true,
+  "scripts": {
+    "start": "node --no-warnings index.js",
+    "format": "prettier . --write",
+    "stylecheck": "prettier . --check"
+  },
+  "author": "Thorn Duke",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "prettier": "^3.2.5"
+  }
+}
