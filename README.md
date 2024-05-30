@@ -109,7 +109,7 @@ Whether you have
 - submit a fix
 - propose new features
 
-please don't hesitate to reach out to us on GitHub and
+please don't hesitate to reach out to me on GitHub and
 [open an issue](https://github.com/ThornDuke/crypto-pwd-generator/issues).
 
 ## Disclaimer

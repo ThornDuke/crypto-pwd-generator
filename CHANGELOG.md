@@ -10,6 +10,13 @@
 (example: https://gist.github.com/ThornDuke/64da76cd4a56b16492d5101691f6108f)
 -->
 
+## [Unreleased]
+
+### Changed
+
+- <src/pwdgen.js>: all the defaults definitions in one place
+- <src/pwdgen.js>: renamed the defaults and the parameters
+
 ## [1.1.3] - 2024-05-30
 
 Changed name and published on npm

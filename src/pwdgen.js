@@ -5,16 +5,16 @@ const crypto = require('node:crypto');
 const $_DEBUG = false;
 
 let defaults = {
-  PASSWORD_LENGTH: 12,
-  PASSWORD_QUANTITY: 10,
-  UPPERCASES: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-  UPPERCASES_OCCURRENCES: 1,
-  LOWERCASES: 'abcdefghijklmnopqrstuvwxyz',
-  LOWERCASES_OCCURRENCES: 1,
-  DIGITS: '0123456789',
-  DIGITS_OCCURRENCES: 1,
-  SYMBOLS: '£$%&+*/-@#',
-  SYMBOLS_OCCURRENCES: 1,
+  pwLength: { type: 'number', min: 8, max: 128, default: 12 },
+  quantity: { type: 'number', min: 1, max: 100, default: 10 },
+  uppercases: { type: 'string', min: 4, max: 128, default: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' },
+  uppercasesQty: { type: 'number', min: 1, max: 2, default: 1 },
+  lowercases: { type: 'string', min: 4, max: 128, default: 'abcdefghijklmnopqrstuvwxyz' },
+  lowercasesQty: { type: 'number', min: 1, max: 2, default: 1 },
+  digits: { type: 'string', min: 4, max: 128, default: '1234567890' },
+  digitsQty: { type: 'number', min: 1, max: 2, default: 1 },
+  symbols: { type: 'string', min: 4, max: 128, default: '£$%&+*/-@#' },
+  symbolsQty: { type: 'number', min: 1, max: 2, default: 1 },
 };
 
 /**
@@ -88,10 +88,10 @@ function shuffleString(str) {
  * @example createPool() // '5%k#BC1j2Fm3GEiADh6l@&0'
  */
 function createPool() {
-  const uc = shuffleString(defaults.UPPERCASES);
-  const lc = shuffleString(defaults.LOWERCASES);
-  const d = shuffleString(defaults.DIGITS);
-  const s = shuffleString(defaults.SYMBOLS);
+  const uc = shuffleString(defaults.uppercases.default);
+  const lc = shuffleString(defaults.lowercases.default);
+  const d = shuffleString(defaults.digits.default);
+  const s = shuffleString(defaults.symbols.default);
 
   const result = shuffleString(uc + lc + d + s);
 
@@ -115,7 +115,7 @@ function createPool() {
  * @param {string} refStr the string used to check the password
  * @returns {boolean}
  *
- * @example checkPassword('fT5s@hjJ', 2, defaults.UPPERCASES) // true
+ * @example checkPassword('fT5s@hjJ', 2, defaults.uppercases.default) // true
  */
 function checkPassword(str, occurrences, refStr) {
   let result = false;
@@ -151,10 +151,10 @@ function isValidPassword(pwd) {
   let result = true;
 
   if (
-    !checkPassword(pwd, defaults.UPPERCASES_OCCURRENCES, defaults.UPPERCASES) ||
-    !checkPassword(pwd, defaults.LOWERCASES_OCCURRENCES, defaults.LOWERCASES) ||
-    !checkPassword(pwd, defaults.DIGITS_OCCURRENCES, defaults.DIGITS) ||
-    !checkPassword(pwd, defaults.SYMBOLS_OCCURRENCES, defaults.SYMBOLS)
+    !checkPassword(pwd, defaults.uppercasesQty.default, defaults.uppercases.default) ||
+    !checkPassword(pwd, defaults.lowercasesQty.default, defaults.lowercases.default) ||
+    !checkPassword(pwd, defaults.digitsQty.default, defaults.digits.default) ||
+    !checkPassword(pwd, defaults.symbolsQty.default, defaults.symbols.default)
   )
     result = false;
 
@@ -174,7 +174,7 @@ function createPassword() {
 
   do {
     result = '';
-    for (let i = 1; i <= defaults.PASSWORD_LENGTH; i++) {
+    for (let i = 1; i <= defaults.pwLength.default; i++) {
       const index = getRandomInt(0, pool.length - 1);
       result += pool[index];
     }
@@ -197,7 +197,7 @@ function createPassword() {
  */
 function createPasswordList() {
   let result = [];
-  const spins = defaults.PASSWORD_QUANTITY;
+  const spins = defaults.quantity.default;
 
   for (let i = 1; i <= spins; i++) {
     const password = createPassword();
@@ -227,22 +227,86 @@ function checkParams(params) {
     );
   }
 
-  if (isConform(params.passwordQuantity, 'number', 1, 100))
-    defaults.PASSWORD_QUANTITY = params.passwordQuantity;
-  if (isConform(params.passwordLength, 'number', 8, 128))
-    defaults.PASSWORD_LENGTH = params.passwordLength;
-  if (isConform(params.uppercases, 'string', 1, 260)) defaults.UPPERCASES = params.uppercases;
-  if (isConform(params.uppercasesOccurrences, 'number', 1, 2))
-    defaults.UPPERCASES_OCCURRENCES = params.uppercasesOccurrences;
-  if (isConform(params.lowercases, 'string', 1, 260)) defaults.LOWERCASES = params.lowercases;
-  if (isConform(params.lowercasesOccurrences, 'number', 1, 2))
-    defaults.LOWERCASES_OCCURRENCES = params.lowercasesOccurrences;
-  if (isConform(params.digits, 'string', 1, 100)) defaults.DIGITS = params.digits;
-  if (isConform(params.digitsOccurrences, 'number', 1, 2))
-    defaults.DIGITS_OCCURRENCES = params.digitsOccurrences;
-  if (isConform(params.symbols, 'string', 1, 100)) defaults.SYMBOLS = params.symbols;
-  if (isConform(params.symbolsOccurrences, 'number', 1, 2))
-    defaults.SYMBOLS_OCCURRENCES = params.symbolsOccurrences;
+  if (
+    isConform(
+      params.pwQuantity,
+      defaults.quantity.type,
+      defaults.quantity.min,
+      defaults.quantity.max
+    )
+  )
+    defaults.quantity.default = params.pwQuantity;
+
+  if (
+    isConform(params.pwLength, defaults.pwLength.type, defaults.pwLength.min, defaults.pwLength.max)
+  )
+    defaults.pwLength.default = params.pwLength;
+
+  if (
+    isConform(
+      params.uppercases,
+      defaults.uppercases.type,
+      defaults.uppercases.min,
+      defaults.uppercases.max
+    )
+  )
+    defaults.uppercases.default = params.uppercases;
+
+  if (
+    isConform(
+      params.uppercasesQty,
+      defaults.uppercasesQty.type,
+      defaults.uppercasesQty.min,
+      defaults.uppercasesQty.max
+    )
+  )
+    defaults.uppercasesQty.default = params.uppercasesQty;
+
+  if (
+    isConform(
+      params.lowercases,
+      defaults.lowercases.type,
+      defaults.lowercases.min,
+      defaults.lowercases.max
+    )
+  )
+    defaults.lowercases.default = params.lowercases;
+
+  if (
+    isConform(
+      params.lowercasesQty,
+      defaults.lowercasesQty.type,
+      defaults.lowercasesQty.min,
+      defaults.lowercasesQty.max
+    )
+  )
+    defaults.lowercasesQty.default = params.lowercasesQty;
+
+  if (isConform(params.digits, defaults.digits.type, defaults.digits.min, defaults.digits.max))
+    defaults.digits.default = params.digits;
+
+  if (
+    isConform(
+      params.digitsQty,
+      defaults.digitsQty.reqType,
+      defaults.digitsQty.min,
+      defaults.digitsQty.max
+    )
+  )
+    defaults.digitsQty.default = params.digitsQty;
+
+  if (isConform(params.symbols, defaults.symbols.type, defaults.symbols.min, defaults.symbols.max))
+    defaults.symbols.default = params.symbols;
+
+  if (
+    isConform(
+      params.symbolsQty,
+      defaults.symbolsQty.type,
+      defaults.symbolsQty.min,
+      defaults.symbolsQty.max
+    )
+  )
+    defaults.symbolsQty.default = params.symbolsQty;
 
   if ($_DEBUG)
     console.log('| DEBUG | <checkParams> =>', {
