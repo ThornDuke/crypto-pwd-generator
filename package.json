@@ -27,11 +27,13 @@
   "scripts": {
     "start": "node --no-warnings index.js",
     "format": "prettier . --write",
-    "stylecheck": "prettier . --check"
+    "stylecheck": "prettier . --check",
+    "document": "jsdoc src/pwdgen.js"
   },
   "author": "Thorn Duke",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
+    "jsdoc": "^4.0.3",
     "prettier": "^3.2.5"
   }
 }

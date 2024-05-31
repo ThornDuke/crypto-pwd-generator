@@ -4,11 +4,12 @@
 ![npms.io](https://img.shields.io/npms-io/maintenance-score/crypto-pwd-generator?style=plastic&logo=npm&label=maintenance)
 ![npms.io](https://img.shields.io/npms-io/quality-score/crypto-pwd-generator?style=plastic&logo=npm&label=quality)
 ![npms.io](https://img.shields.io/npms-io/popularity-score/crypto-pwd-generator?style=plastic&logo=npm&label=popularity)
-[![NPM Downloads](https://img.shields.io/npm/d18m/crypto-pwd-generator?style=plastic&logo=npm)](https://www.npmjs.com/package/crypto-pwd-generator)
 -->
 
 [![NPM Version](https://img.shields.io/npm/v/crypto-pwd-generator?style=plastic&logo=npm&label=version)](https://www.npmjs.com/package/crypto-pwd-generator)
+[![NPM Downloads](https://img.shields.io/npm/d18m/crypto-pwd-generator?style=plastic&logo=npm)](https://www.npmjs.com/package/crypto-pwd-generator)
 [![NPM License](https://img.shields.io/npm/l/crypto-pwd-generator?style=plastic&logo=GNU)](https://www.gnu.org/licenses/gpl-3.0.html)
+[![Crypto](https://img.shields.io/badge/enabled-crypto?style=plastic&logo=alienware&logoColor=white&label=crypto&labelColor=black&color=green)](https://nodejs.org/api/crypto.html)
 ![Node Current](https://img.shields.io/node/v/crypto-pwd-generator?style=plastic&logo=nodedotjs&logoColor=white&logoSize=auto)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/crypto-pwd-generator?style=plastic&logo=webpack)
 
@@ -16,19 +17,25 @@ A simple, configurable library for generating rock-solid passwords.
 
 ## Overview
 
-**crypto-pwd-generator** allows you to generate password lists of any length and composed of any
-group of characters. The mechanism is as simple as calling a single function even without any
-parameters. It can be used in Node.js CLI applications, WEB applications or VSCode extensions.
+**crypto-pwd-generator** allows you to generate password lists or single passwords of any length and
+composed of any group of characters. The mechanism is as simple as calling a single function even
+without any parameters. It can be used in Node.js CLI applications, WEB applications or VSCode
+extensions.
 
 The randomization engine is based on the [Crypto](https://nodejs.org/api/crypto.html) library, which
-ensures a level of security suitable for industrial or military applications.
+is
+[considered cryptographically secure](https://nodejs.org/api/crypto.html#crypto:~:text=The%20node%3Acrypto%20module%20provides%20cryptographic%20functionality%20that%20includes%20a%20set%20of%20wrappers%20for%20OpenSSL%27s%20hash%2C%20HMAC%2C%20cipher%2C%20decipher%2C%20sign%2C%20and%20verify%20functions.)
+and ensures a level of security suitable for industrial or military applications.
+
+Thanks to the use of the `crypto` library and an effective shuffling algorithm, the passwords
+produced are aesthetically beautiful and expressive of a high level of entropy.
 
 ## Features
 
-The generator, by default, produces a list of 10 passwords, each of them 12 characters long and
-containing at least one uppercase character, at least one lowercase character, at least one number
-and at least one special character. It is possible to pass to the generator a list of parameters
-with which every aspect of the password list structure can be configured.
+The generator, by default, produces a password or a list of 10 passwords, each of them 12 characters
+long and containing at least one uppercase character, at least one lowercase character, at least one
+number and at least one special character. It is possible to pass to the generator a list of
+parameters with which every aspect of the password list structure can be configured.
 
 ## Requirements
 
@@ -45,23 +52,36 @@ npm install crypto-pwd-generator
 ```javascript
 const pwds = require('crypto-pwd-generator');
 
-// generate passwords with default parameters
-const pwdListA = pwds.generate();
-pwdListA.forEach(pw => console.log('default', pw));
+// generate a list of passwords with default parameters
+pwds.generate();
+pwds.forEach(pw => console.log('default', pw));
 
-// generate passwords with custom parameters
-const pwdListB = pwds.generate({ quantity: 21, pwLength: 16 });
-pwdListB.forEach(pw => console.log('custom', pw));
+const params = {
+  quantity: 20,
+  pwLength: 32,
+  uppercases: 'abcdef0123456789',
+  lowercases: 'abcdef0123456789',
+  symbols: 'abcdef0123456789',
+  digits: 'abcdef0123456789',
+};
 
-// I need just ONE password
-const password = pwds.generate({ pwLength: 1 })[0];
-console.log('one pw', password);
+// generate a list of passwords with custom parameters
+pwds.generate(params);
+pwds.forEach(pw => console.log('custom', pw));
+
+// generate one password with default parameters
+const password = pwds.password();
+console.log('one default', password);
+
+// generate one password with custom parameters
+const custParPassword = pwds.password(params);
+console.log('one custom', custParPassword);
 ```
 
 ## Managing settings
 
-The generator can be invoked without any parameters (in this case the default parameters are used)
-or with a parameter consisting of an object containing one or more of the following parameters:
+The generators can be invoked without any parameters (in this case the default parameters are used)
+or with a parameter consisting of an object containing one or more of the following values:
 
 ```javascript
 const pwds = require('crypto-pwd-generator');
@@ -77,7 +97,7 @@ const pwdsList = pwds.generate({
   quantity: 10,
   //////
   // A string containing the uppercase characters used to construct the passwords;
-  // type: string; minLength: 8; maxLength: 260; default: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  // type: string; minLength: 4; maxLength: 128; default: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   uppercases: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
   //////
   // Minimum amount of uppercase characters contained in each password;
@@ -85,7 +105,7 @@ const pwdsList = pwds.generate({
   uppercasesQty: 1,
   //////
   // A string containing the lowercase characters used to construct the passwords;
-  // type: string; minLength: 1; maxLength: 260; default: 'abcdefghijklmnopqrstuvwxyz';
+  // type: string; minLength: 4; maxLength: 128; default: 'abcdefghijklmnopqrstuvwxyz';
   lowercases: 'abcdefghijklmnopqrstuvwxyz',
   //////
   // Minimum amount of lowercase characters contained in each password;
@@ -93,7 +113,7 @@ const pwdsList = pwds.generate({
   lowercasesQty: 1,
   //////
   // A string containing the numbers used to construct the passwords;
-  // type: string; minLength: 1; maxLength: 100; default: '0123456789';
+  // type: string; minLength: 4; maxLength: 128; default: '0123456789';
   digits: '0123456789',
   //////
   // Minimum amount of digits contained in each password;
@@ -101,7 +121,7 @@ const pwdsList = pwds.generate({
   digitsQty: 1,
   //////
   // A string containing the symbols used to construct the passwords;
-  // type: string; minLength: 1; maxLength: 100; default: '£$%&+*/-@#';
+  // type: string; minLength: 4; maxLength: 128; default: '£$%&+*/-@#';
   symbols: '£$%&+*/-@#',
   //////
   // Minimum amount of special characters contained in each password;

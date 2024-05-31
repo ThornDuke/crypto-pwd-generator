@@ -15,6 +15,7 @@
 ### Added
 
 - <README.md>: badges
+- <src/pwdgen.js> {module.export.password()}: creates a single password.
 
 ### Changed
 
