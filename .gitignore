@@ -123,5 +123,6 @@ dist
 project-notes.*
 package-lock.json
 project-notes.md
+.DS_Store
 
 # End of file
