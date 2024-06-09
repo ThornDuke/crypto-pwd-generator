@@ -2,13 +2,16 @@
 
 <!--
 ## [Unreleased] | [major.minor.patch] - yyyy-mm-dd
-
 ### Added | Fixed | Changed | Removed | Deprecated | Security
-
 - <filename> {section}: description
-
 (example: https://gist.github.com/ThornDuke/64da76cd4a56b16492d5101691f6108f)
 -->
+
+## [1.3.1] - 2024-06-09
+
+### Changed
+
+- <README.md> {How to use}: rewritten
 
 ## [1.3.0] - 2024-05-31
 

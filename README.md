@@ -52,10 +52,18 @@ npm install crypto-pwd-generator
 ```javascript
 const pwds = require('crypto-pwd-generator');
 
-// generate a list of passwords with default parameters
-pwds.generate();
-pwds.forEach(pw => console.log('default', pw));
+//////
+// Generate a list of passwords with default parameters
+const pwdsList = pwds.generate();
+pwdsList.forEach(pw => console.log('default', pw));
 
+// ... or just a single password
+const pw = pwds.password();
+console.log('one default', pw);
+
+//////
+// Generate 20 passwords 32 characters long in the
+// format of hexadecimal numbers
 const params = {
   quantity: 20,
   pwLength: 32,
@@ -65,17 +73,29 @@ const params = {
   digits: 'abcdef0123456789',
 };
 
-// generate a list of passwords with custom parameters
-pwds.generate(params);
-pwds.forEach(pw => console.log('custom', pw));
+const hexPwList = pwds.generate(params);
+hexPwList.forEach(pw => console.log('hexadecimal', pw));
 
-// generate one password with default parameters
-const password = pwds.password();
-console.log('one default', password);
+// one password with the same requirements
+const custPw = pwds.password(params);
+console.log('one hexadecimal', custPw);
 
-// generate one password with custom parameters
-const custParPassword = pwds.password(params);
-console.log('one custom', custParPassword);
+//////
+// Generate 10 passwords 8 characters long without
+// uppercase characters or symbols; only numbers
+// and lowercase characters.
+params = {
+  pwLength: 8,
+  uppercases: 'abcdefghijklmnopqrstuvwxyz',
+  symbols: '1234567890',
+};
+
+const noUpCasePwList = pwds.generate(params);
+noUpCasePwList.forEach(pw => console.log('no uppercases', pw));
+
+// one password with the same requirements
+const noUpCasePw = pwds.password(params);
+console.log('one no uppercases', noUpCasePw);
 ```
 
 ## Managing settings
