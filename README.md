@@ -107,45 +107,85 @@ or with a parameter consisting of an object containing one or more of the follow
 const pwds = require('crypto-pwd-generator');
 
 const pwdsList = pwds.generate({
-  //////
-  // the length of every generated password;
-  // type: number; min: 8 chars; max: 128 chars; default: 12 chars;
+  /**
+   * the length of every generated password;
+   * type: number
+   * min: 8 chars
+   * max: 128 chars
+   * default: 12 chars
+   */
   pwLength: 12,
-  //////
-  // the length of the generated list;
-  // type: number; min: 1; max: 100; default: 10;
+  /**
+   * the length of the generated list;
+   * type: number
+   * min: 1
+   * max: 100
+   * default: 10
+   */
   quantity: 10,
-  //////
-  // A string containing the uppercase characters used to construct the passwords;
-  // type: string; minLength: 4; maxLength: 128; default: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  /**
+   * A string containing the uppercase characters used to construct the passwords;
+   * type: string
+   * minLength: 4
+   * maxLength: 128
+   * default: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+   */
   uppercases: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-  //////
-  // Minimum amount of uppercase characters contained in each password;
-  // type: number; min: 1; max: 2; default: 1;
+  /**
+   * Minimum amount of uppercase characters contained in each password;
+   * type: number
+   * min: 1
+   * max: 2
+   * default: 1
+   */
   uppercasesQty: 1,
-  //////
-  // A string containing the lowercase characters used to construct the passwords;
-  // type: string; minLength: 4; maxLength: 128; default: 'abcdefghijklmnopqrstuvwxyz';
+  /**
+   * A string containing the lowercase characters used to construct the passwords;
+   * type: string
+   * minLength: 4
+   * maxLength: 128
+   * default: 'abcdefghijklmnopqrstuvwxyz'
+   */
   lowercases: 'abcdefghijklmnopqrstuvwxyz',
-  //////
-  // Minimum amount of lowercase characters contained in each password;
-  // type: number; min: 1; max: 2; default: 1;
+  /**
+   * Minimum amount of lowercase characters contained in each password;
+   * type: number
+   * min: 1
+   * max: 2
+   * default: 1
+   */
   lowercasesQty: 1,
-  //////
-  // A string containing the numbers used to construct the passwords;
-  // type: string; minLength: 4; maxLength: 128; default: '0123456789';
+  /**
+   * A string containing the numbers used to construct the passwords;
+   * type: string
+   * minLength: 4
+   * maxLength: 128
+   * default: '0123456789'
+   */
   digits: '0123456789',
-  //////
-  // Minimum amount of digits contained in each password;
-  // type: number; min: 1; max: 2; default: 1;
+  /**
+   * Minimum amount of digits contained in each password;
+   * type: number
+   * min: 1
+   * max: 2
+   * default: 1
+   */
   digitsQty: 1,
-  //////
-  // A string containing the symbols used to construct the passwords;
-  // type: string; minLength: 4; maxLength: 128; default: '£$%&+*/-@#';
+  /**
+   * A string containing the symbols used to construct the passwords;
+   * type: string
+   * minLength: 4
+   * maxLength: 128
+   * default: '£$%&+/*-@#'
+   */
   symbols: '£$%&+*/-@#',
-  //////
-  // Minimum amount of special characters contained in each password;
-  // type: number; min: 1; max: 2; default: 1;
+  /**
+   * Minimum amount of special characters contained in each password;
+   * type: number
+   * min: 1
+   * max: 2
+   * default: 1
+   */
   symbolsQty: 1,
 });
 ```
