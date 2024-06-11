@@ -74,7 +74,7 @@ function getRandomInt(minInteger, maxInteger) {
 function shuffleArray(arr) {
   let result = [...arr];
 
-  if (arr.length !== 0 && arr.length !== 1) {
+  if (arr.length > 1) {
     for (let k = 1; k <= 3; k++) {
       for (let i = result.length - 1; i > 0; i--) {
         const j = getRandomInt(0, i);
@@ -98,7 +98,7 @@ function shuffleArray(arr) {
  * @example shuffleString('shuffle this') // 'uhsfh istfle'
  */
 function shuffleString(str) {
-  const result = str.length === 0 || str.length === 1 ? str : shuffleArray(str.split('')).join('');
+  const result = str.length <= 1 ? str : shuffleArray(str.split('')).join('');
 
   if ($_DEBUG) console.log('| DEBUG | <shuffleString> =>', { str, result });
 
@@ -235,7 +235,7 @@ function createPasswordList() {
 }
 
 /**
- * Check that the passed parameters conform to certain
+ * Check if the passed parameters conform to certain
  * characteristics. It does not raise errors; if a
  * parameter does not comply, the default parameter
  * is used. It returns no value.
