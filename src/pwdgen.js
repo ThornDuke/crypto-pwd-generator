@@ -297,3 +297,29 @@ module.exports.password = function (params) {
   resetDefaults();
   return pwd;
 };
+
+module.exports.generateAsync = function (params) {
+  return new Promise((resolve, reject) => {
+    try {
+      if (params) checkParams(params);
+      const passwordList = createPasswordList();
+      resetDefaults();
+      resolve(passwordList);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+module.exports.passwordAsync = function (params) {
+  return new Promise((resolve, reject) => {
+    try {
+      if (params) checkParams(params);
+      const pwd = createPassword();
+      resetDefaults();
+      resolve(pwd);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};

@@ -54,8 +54,8 @@ const pwds = require('crypto-pwd-generator');
 
 //////
 // Generate a list of passwords with default parameters
-const pwdsList = pwds.generate();
-pwdsList.forEach(pw => console.log('default', pw));
+const pwList = pwds.generate();
+pwList.forEach(pw => console.log('default', pw));
 
 // ... or just a single password
 const pw = pwds.password();
@@ -64,7 +64,7 @@ console.log('one default', pw);
 //////
 // Generate 20 passwords 32 characters long in the
 // format of hexadecimal numbers
-const params = {
+let params = {
   quantity: 20,
   pwLength: 32,
   uppercases: 'abcdef0123456789',

@@ -7,6 +7,19 @@
 (example: https://gist.github.com/ThornDuke/64da76cd4a56b16492d5101691f6108f)
 -->
 
+## [Unreleased]
+
+### Added
+
+- <example/example.js>: created exmples file and added to the package
+- <src/pwdgen.js> {generateAsync(), passwordAsync()}: asynchronous password generators
+
+### Changed
+
+- <README.md> {Managing settings}: rewritten
+- <README.md> {How to use}: debugged
+- <src/pwdgen.js>: refactoring
+
 ## [1.3.1] - 2024-06-09
 
 ### Changed
