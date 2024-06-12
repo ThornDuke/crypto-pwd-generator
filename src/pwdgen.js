@@ -303,10 +303,11 @@ module.exports.generateAsync = function (params) {
     try {
       if (params) checkParams(params);
       const passwordList = createPasswordList();
-      resetDefaults();
       resolve(passwordList);
     } catch (error) {
       reject(error);
+    } finally {
+      resetDefaults();
     }
   });
 };
@@ -316,10 +317,11 @@ module.exports.passwordAsync = function (params) {
     try {
       if (params) checkParams(params);
       const pwd = createPassword();
-      resetDefaults();
       resolve(pwd);
     } catch (error) {
       reject(error);
+    } finally {
+      resetDefaults();
     }
   });
 };
