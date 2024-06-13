@@ -108,7 +108,7 @@ const pwds = require('crypto-pwd-generator');
 
 const pwdsList = pwds.generate({
   /**
-   * the length of every generated password;
+   * pwLength: the length of every generated password;
    * type: number
    * min: 8 chars
    * max: 128 chars
@@ -116,7 +116,7 @@ const pwdsList = pwds.generate({
    */
   pwLength: 12,
   /**
-   * the length of the generated list;
+   * quantity: the length of the generated list;
    * type: number
    * min: 1
    * max: 100
@@ -124,7 +124,7 @@ const pwdsList = pwds.generate({
    */
   quantity: 10,
   /**
-   * A string containing the uppercase characters used to construct the passwords;
+   * uppercases: A string containing the uppercase characters used to construct the passwords;
    * type: string
    * minLength: 4
    * maxLength: 128
@@ -132,7 +132,7 @@ const pwdsList = pwds.generate({
    */
   uppercases: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
   /**
-   * Minimum amount of uppercase characters contained in each password;
+   * uppercasesQty: Minimum amount of uppercase characters contained in each password;
    * type: number
    * min: 1
    * max: 2
@@ -140,7 +140,7 @@ const pwdsList = pwds.generate({
    */
   uppercasesQty: 1,
   /**
-   * A string containing the lowercase characters used to construct the passwords;
+   * lowercases: A string containing the lowercase characters used to construct the passwords;
    * type: string
    * minLength: 4
    * maxLength: 128
@@ -148,7 +148,7 @@ const pwdsList = pwds.generate({
    */
   lowercases: 'abcdefghijklmnopqrstuvwxyz',
   /**
-   * Minimum amount of lowercase characters contained in each password;
+   * lowercasesQty: Minimum amount of lowercase characters contained in each password;
    * type: number
    * min: 1
    * max: 2
@@ -156,7 +156,7 @@ const pwdsList = pwds.generate({
    */
   lowercasesQty: 1,
   /**
-   * A string containing the numbers used to construct the passwords;
+   * digits: A string containing the numbers used to construct the passwords;
    * type: string
    * minLength: 4
    * maxLength: 128
@@ -164,7 +164,7 @@ const pwdsList = pwds.generate({
    */
   digits: '0123456789',
   /**
-   * Minimum amount of digits contained in each password;
+   * digitsQty: Minimum amount of digits contained in each password;
    * type: number
    * min: 1
    * max: 2
@@ -172,7 +172,7 @@ const pwdsList = pwds.generate({
    */
   digitsQty: 1,
   /**
-   * A string containing the symbols used to construct the passwords;
+   * symbols: A string containing the symbols used to construct the passwords;
    * type: string
    * minLength: 4
    * maxLength: 128
@@ -180,7 +180,7 @@ const pwdsList = pwds.generate({
    */
   symbols: '£$%&+*/-@#',
   /**
-   * Minimum amount of special characters contained in each password;
+   * symbolsQty: Minimum amount of special characters contained in each password;
    * type: number
    * min: 1
    * max: 2
@@ -189,6 +189,9 @@ const pwdsList = pwds.generate({
   symbolsQty: 1,
 });
 ```
+
+If the parameter is omitted, or a value lesser than the minimum or greater than the maximum or of
+the wrong type is entered, the parameter is ignored and the algorithm uses the default value.
 
 ## Contributing
 

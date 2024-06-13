@@ -252,30 +252,9 @@ function checkParams(params) {
     );
   }
 
-  if (isConform(params.quantity, defaults.quantity)) defaults.quantity.value = params.quantity;
-
-  if (isConform(params.pwLength, defaults.pwLength)) defaults.pwLength.value = params.pwLength;
-
-  if (isConform(params.uppercases, defaults.uppercases))
-    defaults.uppercases.value = params.uppercases;
-
-  if (isConform(params.uppercasesQty, defaults.uppercasesQty))
-    defaults.uppercasesQty.value = params.uppercasesQty;
-
-  if (isConform(params.lowercases, defaults.lowercases))
-    defaults.lowercases.value = params.lowercases;
-
-  if (isConform(params.lowercasesQty, defaults.lowercasesQty))
-    defaults.lowercasesQty.value = params.lowercasesQty;
-
-  if (isConform(params.digits, defaults.digits)) defaults.digits.value = params.digits;
-
-  if (isConform(params.digitsQty, defaults.digitsQty)) defaults.digitsQty.value = params.digitsQty;
-
-  if (isConform(params.symbols, defaults.symbols)) defaults.symbols.value = params.symbols;
-
-  if (isConform(params.symbolsQty, defaults.symbolsQty))
-    defaults.symbolsQty.value = params.symbolsQty;
+  Object.keys(defaults).forEach(val => {
+    if (isConform(params[val], defaults[val])) defaults[val].value = params[val];
+  });
 
   if ($_DEBUG)
     console.log('| DEBUG | <checkParams> =>', {
