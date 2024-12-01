@@ -12,7 +12,8 @@
   "unpkg": "dist/index.js",
   "files": [
     "index.js",
-    "src/pwdgen.js"
+    "src/pwdgen.js",
+    "dist/index.js"
   ],
   "repository": {
     "type": "git",
