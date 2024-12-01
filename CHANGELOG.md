@@ -7,6 +7,13 @@
 (example: https://gist.github.com/ThornDuke/64da76cd4a56b16492d5101691f6108f)
 -->
 
+## [2.0.0] - 2024-12-01
+
+### Added
+
+- dist/index.js: added a module that works in the browser
+- README.md: updated
+
 ## [1.3.1] - 2024-06-09
 
 ### Changed
