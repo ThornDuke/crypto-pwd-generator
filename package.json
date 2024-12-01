@@ -1,6 +1,6 @@
 {
   "name": "crypto-pwd-generator",
-  "version": "1.3.1",
+  "version": "3.0.0",
   "description": "A strong password generator",
   "keywords": [
     "cli",
@@ -8,6 +8,8 @@
     "password generator"
   ],
   "main": "index.js",
+  "jsdelivr": "dist/index.js",
+  "unpkg": "dist/index.js",
   "files": [
     "index.js",
     "src/pwdgen.js"
@@ -26,14 +28,16 @@
   "preferGlobal": true,
   "scripts": {
     "start": "node --no-warnings index.js",
+    "serve": "serve",
     "format": "prettier . --write",
-    "stylecheck": "prettier . --check",
-    "document": "jsdoc src/pwdgen.js"
+    "stylecheck": "prettier . --check"
   },
   "author": "Thorn Duke",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "jsdoc": "^4.0.3",
     "prettier": "^3.2.5"
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
   }
 }

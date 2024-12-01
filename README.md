@@ -98,6 +98,42 @@ const noUpCasePw = pwds.password(params);
 console.log('one no uppercases', noUpCasePw);
 ```
 
+## Usage in the browser
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>password generator</title>
+    <script src="https://unpkg.com/crypto-pwd-generator@2"></script>
+    <!--
+    You may also use
+    <script src="https://cdn.jsdelivr.net/npm/crypto-pwd-generator@2"></script>
+    -->
+    <script>
+      function pwClickHandler() {
+        const pw = password();
+        document.getElementById('pw-viewer').innerText = pw;
+      }
+
+      function pwsClickHandler() {
+        const pws = generate();
+        document.getElementById('pws-viewer').innerText = pws.join('\n');
+      }
+    </script>
+  </head>
+
+  <body>
+    <div>
+      <button onclick="pwClickHandler()">generate one password</button>
+      <p id="pw-viewer" style="font-family: monospace; height: 1rem"></p>
+      <button onclick="pwsClickHandler()">generate passwords</button>
+      <p id="pws-viewer" style="font-family: monospace"></p>
+    </div>
+  </body>
+</html>
+```
+
 ## Managing settings
 
 The generators can be invoked without any parameters (in this case the default parameters are used)
